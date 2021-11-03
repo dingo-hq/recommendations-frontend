@@ -1,0 +1,13 @@
+.container {
+  padding: 32px;
+}
+
+.title {
+  margin: 0;
+  font-size: 24px;
+}
+
+.subtitle {
+  color: #707070;
+  font-size: 14px;
+}

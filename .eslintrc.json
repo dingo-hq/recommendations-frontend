@@ -28,7 +28,7 @@
         "import/order": "warn",
         "no-unused-vars": "warn",
         "multiline-ternary": "off",
-        "indent": ["error", 4],
+        "indent": ["warn", 4],
         "prettier/prettier": "warn"
     },
     "ignorePatterns": ["**/*.css"]
