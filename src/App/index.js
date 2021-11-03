@@ -1,4 +1,5 @@
 import React from 'react';
+import ItemCard from '../components/ItemCard';
 import styles from './styles.module.css';
 
 function App() {
@@ -10,6 +11,14 @@ function App() {
                     Based on your order from Bopomofo Cafe
                 </p>
             </header>
+            <main>
+                <ul className={styles.cardList}>
+                    <ItemCard />
+                    <ItemCard />
+                    <ItemCard />
+                    <ItemCard />
+                </ul>
+            </main>
         </section>
     );
 }
