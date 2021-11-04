@@ -1,38 +1,8 @@
-import React, { useState } from 'react';
-import ItemCard from '../components/ItemCard';
+import React from 'react';
+import ItemsList from '../components/Items/ItemsList';
 import styles from './styles.module.css';
 
-const items = [
-    {
-        id: 1,
-        name: 'Matcha Milk Tea',
-        description:
-            'Earthy, sweet, and milky. Made with our high quality matcha.',
-        orderCount: 100,
-    },
-    {
-        id: 2,
-        name: 'Matcha Milk Tea',
-        description:
-            'Earthy, sweet, and milky. Made with our high quality matcha.',
-        orderCount: 100,
-    },
-    {
-        id: 3,
-        name: 'Matcha Milk Tea',
-        description:
-            'Earthy, sweet, and milky. Made with our high quality matcha.',
-        orderCount: 100,
-    },
-];
-
 function App() {
-    const [selectedItemId, setSelectedItemId] = useState(null);
-
-    const handleClick = (id) => {
-        setSelectedItemId(id);
-    };
-
     return (
         <section className={styles.container}>
             <header className="App-header">
@@ -42,16 +12,7 @@ function App() {
                 </p>
             </header>
             <main>
-                <ul className={styles.cardList}>
-                    {items.map((item) => (
-                        <ItemCard
-                            item={item}
-                            key={item.id}
-                            onClick={handleClick}
-                            isSelected={selectedItemId === item.id}
-                        />
-                    ))}
-                </ul>
+                <ItemsList />
             </main>
         </section>
     );

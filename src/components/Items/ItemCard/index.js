@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import mockImage from '../../matcha-milk-tea.png';
+import mockImage from '../../../matcha-milk-tea.png';
 import styles from './styles.module.css';
 
 const ItemCard = ({ onClick, item, isSelected }) => {
