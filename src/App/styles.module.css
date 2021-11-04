@@ -1,6 +1,6 @@
 .container {
   min-height: 100vh;
-  padding: 16px;
+  padding: 16px 16px 64px 16px;
   box-sizing: border-box;
   width: 100%;
 }
@@ -16,14 +16,14 @@
 }
 
 .button {
-  width: 90%;
+  width: 92%;
   position: fixed;
   bottom: 16px;
   box-sizing: border-box;
   margin: 0 auto;
   display: block;
   text-align: center;
-  left: 5%;
+  left: 4%;
   font-family: 'Circular';
   background-color: black;
   color: white;
