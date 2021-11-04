@@ -1,5 +1,8 @@
 .container {
+  min-height: 100vh;
   padding: 16px;
+  box-sizing: border-box;
+  width: 100%;
 }
 
 .title {
@@ -10,4 +13,21 @@
 .subtitle {
   color: #707070;
   font-size: 14px;
+}
+
+.button {
+  width: 90%;
+  position: fixed;
+  bottom: 16px;
+  box-sizing: border-box;
+  margin: 0 auto;
+  display: block;
+  text-align: center;
+  left: 5%;
+  font-family: 'Circular';
+  background-color: black;
+  color: white;
+  padding: 12px 16px;
+  font-weight: bold;
+  border: none;
 }

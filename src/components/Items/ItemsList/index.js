@@ -24,6 +24,20 @@ const items = [
             'Earthy, sweet, and milky. Made with our high quality matcha.',
         orderCount: 100,
     },
+    {
+        id: 4,
+        name: 'Matcha Milk Tea',
+        description:
+            'Earthy, sweet, and milky. Made with our high quality matcha.',
+        orderCount: 100,
+    },
+    {
+        id: 5,
+        name: 'Matcha Milk Tea',
+        description:
+            'Earthy, sweet, and milky. Made with our high quality matcha.',
+        orderCount: 100,
+    },
 ];
 
 const ItemsList = () => {
