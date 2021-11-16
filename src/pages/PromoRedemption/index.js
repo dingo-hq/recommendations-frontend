@@ -1,4 +1,5 @@
 import React from 'react';
+import PrimaryButton from '../../components/PrimaryButton';
 import styles from './styles.module.css';
 
 const PromoRedemption = () => {
@@ -11,10 +12,13 @@ const PromoRedemption = () => {
                     following
                 </p>
             </div>
-            <div className={styles.redemptionContainer}>
-                <span className={styles.redemption}>
-                    10% off 1 Matcha Milk Tea
-                </span>
+            <div className={styles.redemption}>
+                <div className={styles.promoContainer}>
+                    <span className={styles.promoMessage}>
+                        10% off 1 Matcha Milk Tea
+                    </span>
+                </div>
+                <PrimaryButton size="large">Redeem Now</PrimaryButton>
             </div>
             <p className={styles.note}>
                 This promotion maye only redeemed once. This promotion will
