@@ -7,8 +7,16 @@ import styles from './styles.module.css';
 const PromoRedemption = () => {
     const [showConfirmModal, setShowConfirmModal] = useState(false);
     const [isRedeemLoading, setIsRedeemLoading] = useState(false);
+    const [hasRedeemed, setHasRedeemed] = useState(false);
 
-    const handleRedeemClick = () => {};
+    const handleRedeemClick = () => {
+        try {
+            setTimeout(() => setHasRedeemed(true), 250);
+        } catch (error) {
+        } finally {
+            setShowConfirmModal(false);
+        }
+    };
 
     return (
         <div className={styles.container}>
@@ -25,14 +33,20 @@ const PromoRedemption = () => {
                         <span className={styles.promoMessage}>
                             10% off 1 Matcha Milk Tea
                         </span>
-                        <span className={styles.stamp}>Redeemed</span>
+                        {hasRedeemed && (
+                            <span className={styles.stamp}>Redeemed</span>
+                        )}
                     </div>
-                    <PrimaryButton
-                        size="large"
-                        onClick={() => setShowConfirmModal(true)}
-                    >
-                        Redeem Now
-                    </PrimaryButton>
+                    {!hasRedeemed ? (
+                        <PrimaryButton
+                            size="large"
+                            onClick={() => setShowConfirmModal(true)}
+                        >
+                            Redeem Now
+                        </PrimaryButton>
+                    ) : (
+                        <div className={styles.buttonFiller} />
+                    )}
                 </div>
                 <p className={styles.note}>
                     This promotion may only redeemed once. This promotion will
