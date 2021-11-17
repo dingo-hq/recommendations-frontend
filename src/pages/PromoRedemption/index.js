@@ -25,6 +25,7 @@ const PromoRedemption = () => {
                         <span className={styles.promoMessage}>
                             10% off 1 Matcha Milk Tea
                         </span>
+                        <span className={styles.stamp}>Redeemed</span>
                     </div>
                     <PrimaryButton
                         size="large"
