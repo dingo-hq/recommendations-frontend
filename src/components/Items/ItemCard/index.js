@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import mockImage from '../../../matcha-milk-tea.png';
 import styles from './styles.module.css';
 
 const ItemCard = ({
@@ -11,6 +10,7 @@ const ItemCard = ({
     orderCount,
     id,
     isSelected,
+    imageUrl,
 }) => {
     return (
         <li
@@ -24,7 +24,7 @@ const ItemCard = ({
                 </div>
                 <span className={styles.trend}>{orderCount} ordered today</span>
             </div>
-            <img src={mockImage} className={styles.image} />
+            <img src={imageUrl} className={styles.image} />
         </li>
     );
 };
@@ -36,10 +36,12 @@ ItemCard.propTypes = {
     orderCount: PropTypes.number.isRequired,
     id: PropTypes.string.isRequired,
     isSelected: PropTypes.bool.isRequired,
+    imageUrl: PropTypes.string,
 };
 
 ItemCard.defaultProps = {
     description: '',
+    imageUrl: '',
 };
 
 export default ItemCard;

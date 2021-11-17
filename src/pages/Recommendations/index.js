@@ -27,15 +27,19 @@ const Recommendations = ({ recommendations }) => {
             </header>
             <main>
                 <ul className={styles.list}>
-                    {recommendations.map(({ name, squareId }) => (
-                        <ItemCard
-                            name={name}
-                            key={squareId}
-                            id={squareId}
-                            onClick={handleItemClick}
-                            isSelected={selectedItemId === squareId}
-                        />
-                    ))}
+                    {recommendations.map(
+                        ({ squareId, itemInfo: { imageData, itemData } }) => (
+                            <ItemCard
+                                name={itemData?.name}
+                                description={itemData?.description}
+                                key={squareId}
+                                id={squareId}
+                                imageUrl={imageData?.url}
+                                onClick={handleItemClick}
+                                isSelected={selectedItemId === squareId}
+                            />
+                        ),
+                    )}
                 </ul>
             </main>
             <PrimaryButton
