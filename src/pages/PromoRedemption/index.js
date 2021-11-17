@@ -11,7 +11,7 @@ const PromoRedemption = () => {
 
     const handleRedeemClick = () => {
         try {
-            setTimeout(() => setHasRedeemed(true), 250);
+            setTimeout(() => setHasRedeemed(true), 250); // Setting a delay to let the modal close first
         } catch (error) {
         } finally {
             setShowConfirmModal(false);

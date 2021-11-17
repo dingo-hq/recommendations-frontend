@@ -4,9 +4,14 @@ import classNames from 'classnames';
 import mockImage from '../../../matcha-milk-tea.png';
 import styles from './styles.module.css';
 
-const ItemCard = ({ onClick, item, isSelected }) => {
-    const { id, name, description, orderCount } = item;
-
+const ItemCard = ({
+    onClick,
+    name,
+    description,
+    orderCount,
+    id,
+    isSelected,
+}) => {
     return (
         <li
             className={classNames(styles.card, isSelected && styles.selected)}
@@ -26,8 +31,15 @@ const ItemCard = ({ onClick, item, isSelected }) => {
 
 ItemCard.propTypes = {
     onClick: PropTypes.func.isRequired,
-    item: PropTypes.object.isRequired,
+    name: PropTypes.string.isRequired,
+    description: PropTypes.string,
+    orderCount: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     isSelected: PropTypes.bool.isRequired,
+};
+
+ItemCard.defaultProps = {
+    description: '',
 };
 
 export default ItemCard;
