@@ -6,12 +6,15 @@ import styles from './styles.module.css';
 
 const Recommendations = ({ recommendations }) => {
     const [selectedItemId, setSelectedItemId] = useState(null);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handleItemClick = (id) => {
         setSelectedItemId(id);
     };
 
-    const handleItemSubmit = () => {};
+    const handleItemSubmit = () => {
+        setIsSubmitting(true);
+    };
 
     return (
         <section className={styles.container}>
@@ -39,6 +42,7 @@ const Recommendations = ({ recommendations }) => {
                 className={styles.button}
                 size="large"
                 onClick={handleItemSubmit}
+                isLoading={isSubmitting}
             >
                 Submit
             </PrimaryButton>
