@@ -7,9 +7,9 @@ import styles from './styles.module.css';
 
 const PromoRedemption = ({ discount, hasRedeemed, item, onRedeem }) => {
     const [showConfirmModal, setShowConfirmModal] = useState(false);
-    const [isRedeemLoading, setIsRedeemLoading] = useState(false);
+    const [isRedeemConfirmLoading, setIsRedeemConfirmLoading] = useState(false);
 
-    const handleRedeemClick = () => {
+    const handleRedeemConfirmClick = () => {
         try {
             onRedeem();
         } catch (error) {
@@ -17,6 +17,8 @@ const PromoRedemption = ({ discount, hasRedeemed, item, onRedeem }) => {
             setShowConfirmModal(false);
         }
     };
+
+    const promoMessage = `${discount}% off 1 ${item.name}`;
 
     return (
         <div className={styles.container}>
@@ -31,7 +33,7 @@ const PromoRedemption = ({ discount, hasRedeemed, item, onRedeem }) => {
                 <div className={styles.redemption}>
                     <div className={styles.promoContainer}>
                         <span className={styles.promoMessage}>
-                            10% off 1 Matcha Milk Tea
+                            {promoMessage}
                         </span>
                         {hasRedeemed && (
                             <span className={styles.stamp}>Redeemed</span>
@@ -61,9 +63,9 @@ const PromoRedemption = ({ discount, hasRedeemed, item, onRedeem }) => {
                 isShown={showConfirmModal}
                 title="Redeem Promotion"
                 onCloseComplete={() => setShowConfirmModal(false)}
-                onConfirm={handleRedeemClick}
+                onConfirm={handleRedeemConfirmClick}
                 confirmLabel="Redeem"
-                isConfirmLoading={isRedeemLoading}
+                isConfirmLoading={isRedeemConfirmLoading}
             >
                 Are you sure you want to redeem this promotion? Once redeemed it
                 can no longer be used again.
