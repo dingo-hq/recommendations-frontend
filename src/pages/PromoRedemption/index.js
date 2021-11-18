@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import { Dialog } from 'evergreen-ui';
+import PropTypes from 'prop-types';
 import PrimaryButton from '../../components/PrimaryButton';
 import logo from '../../assets/logo.png';
 import styles from './styles.module.css';
 
-const PromoRedemption = () => {
+const PromoRedemption = ({ discount, hasRedeemed, item, onRedeem }) => {
     const [showConfirmModal, setShowConfirmModal] = useState(false);
     const [isRedeemLoading, setIsRedeemLoading] = useState(false);
-    const [hasRedeemed, setHasRedeemed] = useState(false);
 
     const handleRedeemClick = () => {
         try {
-            setTimeout(() => setHasRedeemed(true), 250); // Setting a delay to let the modal close first
+            onRedeem();
         } catch (error) {
         } finally {
             setShowConfirmModal(false);
@@ -72,6 +72,11 @@ const PromoRedemption = () => {
     );
 };
 
-PromoRedemption.propTypes = {};
+PromoRedemption.propTypes = {
+    discount: PropTypes.number.isRequired,
+    hasRedeemed: PropTypes.bool.isRequired,
+    item: PropTypes.object.isRequired,
+    onRedeem: PropTypes.func.isRequired,
+};
 
 export default PromoRedemption;

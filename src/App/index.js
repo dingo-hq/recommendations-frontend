@@ -7,26 +7,41 @@ import Recommendations from '../pages/Recommendations';
 function App() {
     const [isLoading, setIsLoading] = useState(false);
     const [userRecommendations, setUserRecommendations] = useState([]);
-    const hasPromo = false;
+    const [promo, setPromo] = useState(false);
 
-    useEffect(async () => {
+    const fetchRecommendations = async () => {
         try {
+            setIsLoading(true);
+
             const { data } = await getRecommendations('abc');
-            const { recommendations } = data;
+            const { recommendations, promo: promotion } = data;
 
             setUserRecommendations(recommendations);
-            console.log('Got back data from getRecommendations', data);
+            setPromo(promotion);
         } catch (error) {
             console.log('Got back ERROR from getRecommendations', error);
+        } finally {
+            setIsLoading(false);
         }
+    };
+
+    useEffect(() => {
+        fetchRecommendations();
     }, []);
 
     if (isLoading) {
         return <OverlaySpinner isShown={isLoading} />;
     }
 
-    if (hasPromo) {
-        return <PromoRedemption />;
+    if (promo) {
+        return (
+            <PromoRedemption
+                discount={promo.discount}
+                hasRedeemed={promo.hasRedeemed}
+                item={promo.item}
+                onRedeem={fetchRecommendations}
+            />
+        );
     }
 
     return <Recommendations recommendations={userRecommendations} />;

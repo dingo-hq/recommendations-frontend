@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import itemPlaceholder from '../../../assets/item-placeholder.svg';
 import styles from './styles.module.css';
 
 const ItemCard = ({
@@ -12,6 +13,8 @@ const ItemCard = ({
     isSelected,
     imageUrl,
 }) => {
+    const imgSrc = imageUrl || itemPlaceholder;
+
     return (
         <li
             className={classNames(styles.card, isSelected && styles.selected)}
@@ -24,7 +27,7 @@ const ItemCard = ({
                 </div>
                 <span className={styles.trend}>{orderCount} ordered today</span>
             </div>
-            <img src={imageUrl} className={styles.image} />
+            <img src={imgSrc} className={styles.image} />
         </li>
     );
 };
