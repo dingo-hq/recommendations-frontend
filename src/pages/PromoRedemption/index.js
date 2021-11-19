@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Dialog } from 'evergreen-ui';
 import PropTypes from 'prop-types';
+import Lottie from 'lottie-react';
 import PrimaryButton from '../../components/PrimaryButton';
 import logo from '../../assets/logo.png';
+import sunAnimation from '../../assets/cloud.json';
 import styles from './styles.module.css';
 
 const PromoRedemption = ({ discount, hasRedeemed, item, onRedeem }) => {
@@ -70,6 +72,9 @@ const PromoRedemption = ({ discount, hasRedeemed, item, onRedeem }) => {
                 Are you sure you want to redeem this promotion? Once redeemed it
                 can no longer be used again.
             </Dialog>
+            <div className={styles.animationContainer}>
+                <Lottie animationData={sunAnimation} style={{ width: 144 }} />
+            </div>
         </div>
     );
 };

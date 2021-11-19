@@ -2,6 +2,8 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    position: relative;
+    overflow: hidden;
 }
 
 .content {
@@ -84,3 +86,19 @@
 .buttonFiller {
     height: 40px;
 }
+
+.animationContainer {
+    position: absolute;
+    top: 0;
+    z-index: -10;
+    animation: SideToSide 25s linear infinite;
+}
+
+@keyframes SideToSide {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(calc(100vw - 136px));
+    }
+  }
