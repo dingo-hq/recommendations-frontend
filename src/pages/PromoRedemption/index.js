@@ -2,10 +2,55 @@ import React, { useState } from 'react';
 import { Dialog } from 'evergreen-ui';
 import PropTypes from 'prop-types';
 import Lottie from 'lottie-react';
+import Particles from 'react-tsparticles';
 import PrimaryButton from '../../components/PrimaryButton';
 import logo from '../../assets/logo.png';
 import sunAnimation from '../../assets/cloud.json';
 import styles from './styles.module.css';
+
+const particlesParams = {
+    fpsLimit: 60,
+    interactivity: {
+        modes: {
+            bubble: {
+                distance: 400,
+                duration: 2,
+                opacity: 0.8,
+                size: 40,
+            },
+        },
+    },
+    particles: {
+        color: {
+            value: '#E38824',
+        },
+        move: {
+            direction: 'top',
+            enable: true,
+            outMode: 'out',
+            random: false,
+            speed: 1,
+        },
+        number: {
+            density: {
+                enable: true,
+                value_area: 800,
+            },
+            value: 8,
+        },
+        opacity: {
+            value: 0.5,
+        },
+        shape: {
+            type: 'circle',
+        },
+        size: {
+            random: true,
+            value: 100,
+        },
+    },
+    detectRetina: true,
+};
 
 const PromoRedemption = ({ discount, hasRedeemed, item, onRedeem }) => {
     const [showConfirmModal, setShowConfirmModal] = useState(false);
@@ -72,9 +117,7 @@ const PromoRedemption = ({ discount, hasRedeemed, item, onRedeem }) => {
                 Are you sure you want to redeem this promotion? Once redeemed it
                 can no longer be used again.
             </Dialog>
-            <div className={styles.animationContainer}>
-                <Lottie animationData={sunAnimation} style={{ width: 144 }} />
-            </div>
+            <Particles className={styles.particles} options={particlesParams} />
         </div>
     );
 };

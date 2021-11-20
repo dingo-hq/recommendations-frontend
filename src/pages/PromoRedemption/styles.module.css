@@ -94,11 +94,15 @@
     animation: SideToSide 25s linear infinite;
 }
 
+.particles {
+    z-index: -10;
+}
+
 @keyframes SideToSide {
     0%, 100% {
         transform: translateX(0);
     }
     50% {
-        transform: translateX(calc(100vw - 136px));
+        transform: translateX(calc(100vw - 144px));
     }
-  }
+}
