@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import { Dialog } from 'evergreen-ui';
 import PropTypes from 'prop-types';
-import Lottie from 'lottie-react';
 import Particles from 'react-tsparticles';
 import PrimaryButton from '../../components/PrimaryButton';
 import logo from '../../assets/logo.png';
-import sunAnimation from '../../assets/cloud.json';
 import styles from './styles.module.css';
 
 const particlesParams = {
