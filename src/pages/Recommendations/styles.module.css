@@ -17,12 +17,12 @@
 
 .button {
     width: calc(100% - 32px);
-    position: fixed;
+    position: fixed !important;
     bottom: 16px;
     box-sizing: border-box;
     margin: 0 16px;
     text-align: center;
-    font-family: 'Sharp Grotesk';
+    font-family: 'Sharp Grotesk' !important;
     background-color: black;
     color: white;
     font-weight: bold;
