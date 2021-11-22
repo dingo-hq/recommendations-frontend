@@ -9,20 +9,24 @@ const MAX_RECOMMENDATION_SIZE = 4;
 function App() {
     const [isLoading, setIsLoading] = useState(false);
     const [userRecommendations, setUserRecommendations] = useState([]);
-    const [promo, setPromo] = useState(false);
+    const [customerPromo, setCustomerPromo] = useState(false);
 
     const fetchRecommendations = async () => {
         try {
             setIsLoading(true);
 
-            const { recommendations, promo: promotion } =
-                await getRecommendations(
-                    '_9DHXXeEyrDiTld7_ayUA',
-                    MAX_RECOMMENDATION_SIZE,
-                );
+            const { recommendations, promo } = await getRecommendations(
+                '_9DHXXeEyrDiTld7_ayUA',
+                MAX_RECOMMENDATION_SIZE,
+            );
+
+            // The promo item is in the list of recommended items
+            const promoItem = recommendations.find(
+                ({ squareId }) => squareId === promo.id,
+            );
 
             setUserRecommendations(recommendations);
-            setPromo(promotion);
+            setCustomerPromo({ ...promo, item: promoItem });
         } catch (error) {
             console.log('Got back ERROR from getRecommendations', error);
         } finally {
@@ -38,12 +42,13 @@ function App() {
         return <OverlaySpinner isShown={isLoading} />;
     }
 
-    if (promo) {
+    if (customerPromo) {
         return (
             <PromoRedemption
-                discount={promo.discount}
-                hasRedeemed={promo.hasRedeemed}
-                item={promo.item}
+                loyaltyPoints={customerPromo.loyaltyPoints}
+                percentageDiscount={customerPromo.percentageDiscount}
+                hasRedeemed={customerPromo.hasRedeemed}
+                item={customerPromo.item}
                 onRedeem={fetchRecommendations}
             />
         );

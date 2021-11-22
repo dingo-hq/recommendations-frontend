@@ -2,17 +2,22 @@
     padding: 16px;
     box-sizing: border-box;
     background: #FFFFFF;
-    box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.06);
+    box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.05);
     border-radius: 8px;
     list-style: none;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    gap: 16px;
+    transition: all ease 250ms;
+}
+
+.card:hover {
+    cursor: pointer;
+    background-color: #F3F6FF;
 }
 
 .selected {
-    border: 2px solid black;
-    padding: calc(16px - 2px);
+    background-color: #D6E0FF !important;
 }
 
 .content {

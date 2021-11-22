@@ -50,7 +50,14 @@ const particlesParams = {
     detectRetina: true,
 };
 
-const PromoRedemption = ({ discount, hasRedeemed, item, onRedeem }) => {
+const PromoRedemption = ({
+    loyaltyPoints,
+    percentageDiscount,
+    hasRedeemed,
+    item,
+    onRedeem,
+    merchantName,
+}) => {
     const [showConfirmModal, setShowConfirmModal] = useState(false);
     const [isRedeemConfirmLoading, setIsRedeemConfirmLoading] = useState(false);
 
@@ -63,13 +70,17 @@ const PromoRedemption = ({ discount, hasRedeemed, item, onRedeem }) => {
         }
     };
 
-    const promoMessage = `${discount}% off 1 ${item.name}`;
+    const promoPhrase =
+        loyaltyPoints !== null
+            ? `${loyaltyPoints} points on`
+            : `${percentageDiscount}% off`;
+    const promoMessage = `${promoPhrase} 1 ${item.name}`;
 
     return (
         <div className={styles.container}>
             <section className={styles.content}>
                 <div className={styles.info}>
-                    <h1 className={styles.name}>Bopomofo Cafe</h1>
+                    <h1 className={styles.name}>{merchantName}</h1>
                     <p className={styles.description}>
                         Present this screen to the store to redeem the following
                         promotion
@@ -121,10 +132,12 @@ const PromoRedemption = ({ discount, hasRedeemed, item, onRedeem }) => {
 };
 
 PromoRedemption.propTypes = {
-    discount: PropTypes.number.isRequired,
+    loyaltyPoints: PropTypes.number.isRequired,
+    percentageDiscount: PropTypes.number.isRequired,
     hasRedeemed: PropTypes.bool.isRequired,
     item: PropTypes.object.isRequired,
     onRedeem: PropTypes.func.isRequired,
+    merchantName: PropTypes.string.isRequired,
 };
 
 export default PromoRedemption;
