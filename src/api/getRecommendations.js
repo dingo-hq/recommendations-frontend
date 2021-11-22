@@ -1,5 +1,19 @@
 import request from '../utils/request';
 
-export default async function getRecommendations(recommendationId) {
-    return request('GET', `/recommendations/${recommendationId}`);
+export default async function getRecommendations(
+    recommendationId,
+    maxRecommendationSize,
+) {
+    const { data } = await request(
+        'GET',
+        `/recommendations/${recommendationId}`,
+    );
+    const { recommendations, promo } = data;
+
+    const limitedRecommendations = recommendations.slice(
+        0,
+        maxRecommendationSize,
+    );
+
+    return { recommendations: limitedRecommendations, promo };
 }

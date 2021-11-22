@@ -4,6 +4,8 @@ import OverlaySpinner from '../components/OverlaySpinner';
 import PromoRedemption from '../pages/PromoRedemption';
 import Recommendations from '../pages/Recommendations';
 
+const MAX_RECOMMENDATION_SIZE = 4;
+
 function App() {
     const [isLoading, setIsLoading] = useState(false);
     const [userRecommendations, setUserRecommendations] = useState([]);
@@ -13,8 +15,11 @@ function App() {
         try {
             setIsLoading(true);
 
-            const { data } = await getRecommendations('abc');
-            const { recommendations, promo: promotion } = data;
+            const { recommendations, promo: promotion } =
+                await getRecommendations(
+                    '_9DHXXeEyrDiTld7_ayUA',
+                    MAX_RECOMMENDATION_SIZE,
+                );
 
             setUserRecommendations(recommendations);
             setPromo(promotion);
