@@ -59,6 +59,7 @@ const PromoRedemption = ({
     onRedeemComplete,
     merchantName,
     recommendationId,
+    hasPurchased,
 }) => {
     const [showConfirmModal, setShowConfirmModal] = useState(false);
     const [isRedeemConfirmLoading, setIsRedeemConfirmLoading] = useState(false);
@@ -80,11 +81,14 @@ const PromoRedemption = ({
         }
     };
 
-    const promoPhrase =
+    const promoMessage =
         loyaltyPoints !== null
-            ? `${loyaltyPoints} points on`
-            : `${percentageDiscount}% off`;
-    const promoMessage = `${promoPhrase} 1 ${item.name}`;
+            ? `${loyaltyPoints} points have been added to your account for 1 ${item.name}`
+            : `${percentageDiscount}% off 1 ${item.name}`;
+
+    const isLoyaltyRedeemed =
+        loyaltyPoints !== null && (hasPurchased || hasRedeemed);
+    const isPercentageOffRedeemed = percentageDiscount && hasRedeemed;
 
     return (
         <div className={styles.container}>
@@ -101,11 +105,11 @@ const PromoRedemption = ({
                         <span className={styles.promoMessage}>
                             {promoMessage}
                         </span>
-                        {hasRedeemed && (
+                        {(isLoyaltyRedeemed || isPercentageOffRedeemed) && (
                             <span className={styles.stamp}>Redeemed</span>
                         )}
                     </div>
-                    {!hasRedeemed ? (
+                    {!hasRedeemed && percentageDiscount ? (
                         <PrimaryButton
                             size="large"
                             onClick={() => setShowConfirmModal(true)}
@@ -149,6 +153,7 @@ PromoRedemption.propTypes = {
     onRedeemComplete: PropTypes.func.isRequired,
     merchantName: PropTypes.string.isRequired,
     recommendationId: PropTypes.string.isRequired,
+    hasPurchased: PropTypes.bool.isRequired,
 };
 
 export default PromoRedemption;

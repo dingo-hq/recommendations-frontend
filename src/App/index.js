@@ -12,17 +12,22 @@ function App() {
     const [userRecommendations, setUserRecommendations] = useState([]);
     const [customerPromo, setCustomerPromo] = useState(false);
     const [isUrlInvalid, setIsUrlInvalid] = useState(false);
-    const recommendationId = window.location.pathname;
+    const recommendationId = window.location.pathname.slice(1);
 
     const fetchRecommendations = async () => {
         try {
             setIsLoading(true);
 
-            const { recommendations, promo, merchantName, redeemedAt } =
-                await getRecommendations(
-                    recommendationId,
-                    MAX_RECOMMENDATION_SIZE,
-                );
+            const {
+                recommendations,
+                promo,
+                merchantName,
+                redeemedAt,
+                purchasedAt,
+            } = await getRecommendations(
+                recommendationId,
+                MAX_RECOMMENDATION_SIZE,
+            );
             console.log('recommendations', recommendations);
 
             // The promo item is in the list of recommended items
@@ -38,6 +43,7 @@ function App() {
                     merchantName,
                     item: promoItem,
                     hasRedeemed: !!redeemedAt,
+                    hasPurchased: !!purchasedAt,
                 });
             }
         } catch (error) {
@@ -67,6 +73,7 @@ function App() {
                 loyaltyPoints={customerPromo.loyaltyPoints}
                 percentageDiscount={customerPromo.percentageDiscount}
                 hasRedeemed={customerPromo.hasRedeemed}
+                hasPurchased={customerPromo.hasPurchased}
                 item={customerPromo.item}
                 onRedeemComplete={fetchRecommendations}
                 merchantName={customerPromo.merchantName}
