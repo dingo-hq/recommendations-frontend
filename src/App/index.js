@@ -15,10 +15,11 @@ function App() {
         try {
             setIsLoading(true);
 
-            const { recommendations, promo } = await getRecommendations(
-                '_9DHXXeEyrDiTld7_ayUA',
-                MAX_RECOMMENDATION_SIZE,
-            );
+            const { recommendations, promo, merchantName } =
+                await getRecommendations(
+                    '_9DHXXeEyrDiTld7_ayUA',
+                    MAX_RECOMMENDATION_SIZE,
+                );
 
             // The promo item is in the list of recommended items
             const promoItem = recommendations.find(
@@ -26,7 +27,7 @@ function App() {
             );
 
             setUserRecommendations(recommendations);
-            setCustomerPromo({ ...promo, item: promoItem });
+            setCustomerPromo({ ...promo, merchantName, item: promoItem });
         } catch (error) {
             console.log('Got back ERROR from getRecommendations', error);
         } finally {
@@ -50,6 +51,7 @@ function App() {
                 hasRedeemed={customerPromo.hasRedeemed}
                 item={customerPromo.item}
                 onRedeem={fetchRecommendations}
+                merchantName={customerPromo.merchantName}
             />
         );
     }
