@@ -20,14 +20,13 @@ const ItemCard = ({
             className={classNames(styles.card, isSelected && styles.selected)}
             onClick={() => onClick(id)}
         >
+            <img src={imgSrc} className={styles.image} />
             <div className={styles.content}>
                 <div className={styles.info}>
                     <h2 className={styles.name}>{name}</h2>
                     <p className={styles.description}>{description}</p>
                 </div>
-                <span className={styles.trend}>{orderCount} ordered today</span>
             </div>
-            <img src={imgSrc} className={styles.image} />
         </li>
     );
 };

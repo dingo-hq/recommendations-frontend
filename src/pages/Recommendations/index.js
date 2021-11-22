@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { toaster } from 'evergreen-ui';
 import ItemCard from '../../components/Items/ItemCard';
 import PrimaryButton from '../../components/PrimaryButton';
+import submitItem from '../../api/submitItem';
 import styles from './styles.module.css';
 
-const Recommendations = ({ recommendations }) => {
+const Recommendations = ({
+    recommendations,
+    onItemSubmitComplete,
+    recommendationId,
+}) => {
     const [selectedItemId, setSelectedItemId] = useState(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -12,8 +18,20 @@ const Recommendations = ({ recommendations }) => {
         setSelectedItemId(id);
     };
 
-    const handleItemSubmit = () => {
-        setIsSubmitting(true);
+    const handleItemSubmit = async () => {
+        try {
+            setIsSubmitting(true);
+
+            await submitItem(recommendationId, selectedItemId);
+
+            onItemSubmitComplete();
+        } catch {
+            toaster.danger(
+                'An error occurred while trying to submit your item',
+            );
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
@@ -56,6 +74,8 @@ const Recommendations = ({ recommendations }) => {
 
 Recommendations.propTypes = {
     recommendations: PropTypes.arrayOf(PropTypes.object).isRequired,
+    onItemSubmitComplete: PropTypes.func.isRequired,
+    recommendationId: PropTypes.string.isRequired,
 };
 
 export default Recommendations;

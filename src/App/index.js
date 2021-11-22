@@ -17,22 +17,26 @@ function App() {
 
             const { recommendations, promo, merchantName, redeemedAt } =
                 await getRecommendations(
-                    '_9DHXXeEyrDiTld7_ayUA',
+                    'eDa2jRRyLGcZH6rUMvfCU',
                     MAX_RECOMMENDATION_SIZE,
                 );
+            console.log('recommendations', recommendations);
 
             // The promo item is in the list of recommended items
             const promoItem = recommendations.find(
-                ({ squareId }) => squareId === promo.id,
+                ({ squareId }) => squareId === promo?.id,
             );
 
             setUserRecommendations(recommendations);
-            setCustomerPromo({
-                ...promo,
-                merchantName,
-                item: promoItem,
-                hasRedeemed: !!redeemedAt,
-            });
+
+            if (promoItem) {
+                setCustomerPromo({
+                    ...promo,
+                    merchantName,
+                    item: promoItem,
+                    hasRedeemed: !!redeemedAt,
+                });
+            }
         } catch (error) {
             console.log('Got back ERROR from getRecommendations', error);
         } finally {
@@ -43,6 +47,8 @@ function App() {
     useEffect(() => {
         fetchRecommendations();
     }, []);
+
+    console.log('customerPromo', customerPromo);
 
     if (isLoading) {
         return <OverlaySpinner isShown={isLoading} />;
@@ -57,12 +63,18 @@ function App() {
                 item={customerPromo.item}
                 onRedeemComplete={fetchRecommendations}
                 merchantName={customerPromo.merchantName}
-                recommendationId="_9DHXXeEyrDiTld7_ayUA"
+                recommendationId="eDa2jRRyLGcZH6rUMvfCU"
             />
         );
     }
 
-    return <Recommendations recommendations={userRecommendations} />;
+    return (
+        <Recommendations
+            recommendations={userRecommendations}
+            recommendationId="eDa2jRRyLGcZH6rUMvfCU"
+            onItemSubmitComplete={fetchRecommendations}
+        />
+    );
 }
 
 export default App;
