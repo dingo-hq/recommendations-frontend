@@ -1,0 +1,46 @@
+.container {
+    height: 100vh;
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 32px;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.errorCode {
+    font-size: 96px;
+    font-weight: bold;
+    position: absolute;
+    z-index: -1;
+    top: -48px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.photoContainer {
+    position: relative;
+    width: 100%;
+    display: flex;
+}
+
+.photo {
+    width: 75%;
+    margin: 0 auto;
+}
+
+.title {
+    font-size: 32px;
+    margin: 0;
+}
+
+.description {
+    margin: 0;
+    text-align: center;
+}

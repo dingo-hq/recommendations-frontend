@@ -3,6 +3,7 @@ import getRecommendations from '../api/getRecommendations';
 import OverlaySpinner from '../components/OverlaySpinner';
 import PromoRedemption from '../pages/PromoRedemption';
 import Recommendations from '../pages/Recommendations';
+import NotFound from '../pages/NotFound';
 
 const MAX_RECOMMENDATION_SIZE = 4;
 
@@ -10,6 +11,8 @@ function App() {
     const [isLoading, setIsLoading] = useState(false);
     const [userRecommendations, setUserRecommendations] = useState([]);
     const [customerPromo, setCustomerPromo] = useState(false);
+    const [isUrlInvalid, setIsUrlInvalid] = useState(false);
+    const recommendationId = window.location.pathname;
 
     const fetchRecommendations = async () => {
         try {
@@ -17,7 +20,7 @@ function App() {
 
             const { recommendations, promo, merchantName, redeemedAt } =
                 await getRecommendations(
-                    'eDa2jRRyLGcZH6rUMvfCU',
+                    recommendationId,
                     MAX_RECOMMENDATION_SIZE,
                 );
             console.log('recommendations', recommendations);
@@ -38,7 +41,9 @@ function App() {
                 });
             }
         } catch (error) {
-            console.log('Got back ERROR from getRecommendations', error);
+            if (error.response?.status === 404) {
+                setIsUrlInvalid(true);
+            }
         } finally {
             setIsLoading(false);
         }
@@ -48,7 +53,9 @@ function App() {
         fetchRecommendations();
     }, []);
 
-    console.log('customerPromo', customerPromo);
+    if (isUrlInvalid) {
+        return <NotFound />;
+    }
 
     if (isLoading) {
         return <OverlaySpinner isShown={isLoading} />;
@@ -63,7 +70,7 @@ function App() {
                 item={customerPromo.item}
                 onRedeemComplete={fetchRecommendations}
                 merchantName={customerPromo.merchantName}
-                recommendationId="eDa2jRRyLGcZH6rUMvfCU"
+                recommendationId={recommendationId}
             />
         );
     }
@@ -71,7 +78,7 @@ function App() {
     return (
         <Recommendations
             recommendations={userRecommendations}
-            recommendationId="eDa2jRRyLGcZH6rUMvfCU"
+            recommendationId={recommendationId}
             onItemSubmitComplete={fetchRecommendations}
         />
     );
