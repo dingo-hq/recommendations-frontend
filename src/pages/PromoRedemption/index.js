@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Dialog } from 'evergreen-ui';
+import { Dialog, toaster } from 'evergreen-ui';
 import PropTypes from 'prop-types';
 import Particles from 'react-tsparticles';
 import PrimaryButton from '../../components/PrimaryButton';
 import logo from '../../assets/logo.png';
+import redeemPromotion from '../../api/redeemPromotion';
 import styles from './styles.module.css';
 
 const particlesParams = {
@@ -55,18 +56,27 @@ const PromoRedemption = ({
     percentageDiscount,
     hasRedeemed,
     item,
-    onRedeem,
+    onRedeemComplete,
     merchantName,
+    recommendationId,
 }) => {
     const [showConfirmModal, setShowConfirmModal] = useState(false);
     const [isRedeemConfirmLoading, setIsRedeemConfirmLoading] = useState(false);
 
-    const handleRedeemConfirmClick = () => {
+    const handleRedeemConfirmClick = async () => {
         try {
-            onRedeem();
+            setIsRedeemConfirmLoading(true);
+            const { data } = await redeemPromotion(recommendationId);
+            console.log('Got back data from redeem', data);
+
+            onRedeemComplete();
         } catch (error) {
+            toaster.danger(
+                'An error occurred while trying to redeem the promotion',
+            );
         } finally {
             setShowConfirmModal(false);
+            setIsRedeemConfirmLoading(false);
         }
     };
 
@@ -136,8 +146,9 @@ PromoRedemption.propTypes = {
     percentageDiscount: PropTypes.number.isRequired,
     hasRedeemed: PropTypes.bool.isRequired,
     item: PropTypes.object.isRequired,
-    onRedeem: PropTypes.func.isRequired,
+    onRedeemComplete: PropTypes.func.isRequired,
     merchantName: PropTypes.string.isRequired,
+    recommendationId: PropTypes.string.isRequired,
 };
 
 export default PromoRedemption;

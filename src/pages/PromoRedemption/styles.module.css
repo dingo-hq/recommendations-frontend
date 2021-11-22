@@ -70,7 +70,7 @@
     font-weight: bold;
     text-transform: uppercase;
     mask-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/8399/grunge.png');
-    color: rgba(209, 67, 67, 0.75);
+    color: rgba(209, 67, 67, 0.6);
     padding: 4px;
 }
 

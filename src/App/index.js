@@ -15,7 +15,7 @@ function App() {
         try {
             setIsLoading(true);
 
-            const { recommendations, promo, merchantName } =
+            const { recommendations, promo, merchantName, redeemedAt } =
                 await getRecommendations(
                     '_9DHXXeEyrDiTld7_ayUA',
                     MAX_RECOMMENDATION_SIZE,
@@ -27,7 +27,12 @@ function App() {
             );
 
             setUserRecommendations(recommendations);
-            setCustomerPromo({ ...promo, merchantName, item: promoItem });
+            setCustomerPromo({
+                ...promo,
+                merchantName,
+                item: promoItem,
+                hasRedeemed: !!redeemedAt,
+            });
         } catch (error) {
             console.log('Got back ERROR from getRecommendations', error);
         } finally {
@@ -50,8 +55,9 @@ function App() {
                 percentageDiscount={customerPromo.percentageDiscount}
                 hasRedeemed={customerPromo.hasRedeemed}
                 item={customerPromo.item}
-                onRedeem={fetchRecommendations}
+                onRedeemComplete={fetchRecommendations}
                 merchantName={customerPromo.merchantName}
+                recommendationId="_9DHXXeEyrDiTld7_ayUA"
             />
         );
     }
